@@ -135,3 +135,27 @@ curl -X POST http://localhost:4000/graphql \
   }
 }
 ```
+
+---
+
+### 2. Query: Fetch a Single Student by ID
+
+#### cURL Command:
+```bash
+curl -X POST http://localhost:4000/graphql \
+  -H "Content-Type: application/json" \
+  -d '{"query": "query { student(id: \"1\") { id name course } }"}'
+```
+
+#### Expected Output:
+```json
+{
+  "data": {
+    "student": {
+      "id": "1",
+      "name": "Alice Johnson",
+      "course": "Computer Science"
+    }
+  }
+}
+```
