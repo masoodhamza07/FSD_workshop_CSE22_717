@@ -47,3 +47,17 @@ Exp-06_GraphQL-API/
 ### Modern Approach vs Legacy `express-graphql`
 - **Modern standard**: The official GraphQL foundation recommends using [`graphql-http`](https://github.com/graphql/graphql-http) for HTTP server bindings as it adheres to the latest GraphQL over HTTP specification.
 - **Legacy approach**: `express-graphql` was historically popular and used `graphqlHTTP({ schema, rootValue, graphiql: true })`. Both approaches follow the same schema and resolver design patterns.
+
+---
+
+## Prerequisites & Installation
+
+1. Ensure **Node.js** (v16+) and **npm** are installed.
+2. Navigate to the experiment directory:
+   ```bash
+   cd Exp-06_GraphQL-API
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
