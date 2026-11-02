@@ -84,3 +84,16 @@ const server = http.createServer((req, res) => {
         sendResponse(res, 404, 'application/json; charset=utf-8', JSON.stringify(notFoundResponse, null, 2));
     }
 });
+
+// Start listening for incoming requests
+server.listen(PORT, HOST, () => {
+    console.log(`====================================================`);
+    console.log(`  EXPERIMENT 5: BASIC HTTP SERVER IS RUNNING`);
+    console.log(`====================================================`);
+    console.log(`Server URL: http://${HOST}:${PORT}`);
+    console.log(`Endpoints:`);
+    console.log(`  - GET http://${HOST}:${PORT}/        (Hello World)`);
+    console.log(`  - GET http://${HOST}:${PORT}/about   (Server Details JSON)`);
+    console.log(`  - GET http://${HOST}:${PORT}/headers (Request Headers JSON)`);
+    console.log(`\nWaiting for requests... (Press Ctrl+C to stop)`);
+});
