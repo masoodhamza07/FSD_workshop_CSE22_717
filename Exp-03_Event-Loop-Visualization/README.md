@@ -93,3 +93,25 @@ The experiment code in `index.js` illustrates three distinct scenarios:
   - Then the Promise queue executes (`C-4`, `C-5`).
   - A Promise scheduling a `nextTick` (`C-7`) and a `nextTick` scheduling a Promise (`C-6`) demonstrate that Node returns to drain `nextTick` before proceeding to macrotasks.
 
+---
+
+## How to Run
+
+### Prerequisites
+- Node.js installed (v14.x or higher)
+
+### Steps
+1. Navigate to the experiment directory:
+   ```bash
+   cd Exp-03_Event-Loop-Visualization
+   ```
+2. Run the script:
+   ```bash
+   node index.js
+   ```
+   *Or via npm:*
+   ```bash
+   npm start
+   ```
+
+---
