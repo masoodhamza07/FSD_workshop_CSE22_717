@@ -233,3 +233,30 @@ curl -X POST http://localhost:4000/graphql \
   }
 }
 ```
+
+---
+
+### 5. Mutation: Delete a Student
+
+#### GraphQL Mutation Syntax:
+```graphql
+mutation {
+  deleteStudent(id: "3")
+}
+```
+
+#### cURL Command:
+```bash
+curl -X POST http://localhost:4000/graphql \
+  -H "Content-Type: application/json" \
+  -d '{"query": "mutation { deleteStudent(id: \"3\") }"}'
+```
+
+#### Expected Output:
+```json
+{
+  "data": {
+    "deleteStudent": "Student \"Charlie Brown\" (ID: 3) deleted successfully."
+  }
+}
+```
