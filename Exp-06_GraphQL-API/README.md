@@ -96,3 +96,42 @@ GraphQL requests are sent as HTTP `POST` requests to `http://localhost:4000/grap
 ```
 
 You can test this using **Postman**, **Insomnia**, or **cURL**.
+
+---
+
+### 1. Query: Fetch All Students
+
+#### cURL Command:
+```bash
+curl -X POST http://localhost:4000/graphql \
+  -H "Content-Type: application/json" \
+  -d '{"query": "query { students { id name age course } }"}'
+```
+
+#### Expected Output:
+```json
+{
+  "data": {
+    "students": [
+      {
+        "id": "1",
+        "name": "Alice Johnson",
+        "age": 20,
+        "course": "Computer Science"
+      },
+      {
+        "id": "2",
+        "name": "Bob Smith",
+        "age": 22,
+        "course": "Information Technology"
+      },
+      {
+        "id": "3",
+        "name": "Charlie Brown",
+        "age": 21,
+        "course": "Data Science"
+      }
+    ]
+  }
+}
+```
