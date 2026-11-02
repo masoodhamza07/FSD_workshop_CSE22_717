@@ -12,3 +12,15 @@
 const express = require('express');
 const { buildSchema } = require('graphql');
 const { createHandler } = require('graphql-http/lib/use/express');
+
+// ============================================================================
+// Alternative: Traditional express-graphql approach (for reference)
+// ============================================================================
+// const { graphqlHTTP } = require('express-graphql');
+// 
+// app.use('/graphql', graphqlHTTP({
+//   schema: schema,
+//   rootValue: root,
+//   graphiql: true // Built-in interactive browser UI
+// }));
+// ============================================================================
