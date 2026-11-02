@@ -145,3 +145,41 @@ process.on('SIGINT', () => {
     });
 });
 ```
+
+---
+
+## How to run
+
+1. Navigate to the experiment directory:
+   ```bash
+   cd Exp-05_HTTP-Server
+   ```
+
+2. Start the HTTP server:
+   ```bash
+   node index.js
+   ```
+   Or:
+   ```bash
+   npm start
+   ```
+
+3. Open your browser or use `curl` to test the endpoints:
+   - **Root Route**: Open [http://localhost:3000/](http://localhost:3000/) in your web browser, or run:
+     ```bash
+     curl -i http://localhost:3000/
+     ```
+   - **About Route**: Open [http://localhost:3000/about](http://localhost:3000/about), or run:
+     ```bash
+     curl -i http://localhost:3000/about
+     ```
+   - **Headers Route**: Open [http://localhost:3000/headers](http://localhost:3000/headers), or run:
+     ```bash
+     curl -i http://localhost:3000/headers
+     ```
+   - **404 Route**: Open [http://localhost:3000/invalid-path](http://localhost:3000/invalid-path), or run:
+     ```bash
+     curl -i http://localhost:3000/invalid-path
+     ```
+
+4. Press `Ctrl + C` in the terminal to gracefully stop the server.
