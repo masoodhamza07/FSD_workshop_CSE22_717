@@ -90,3 +90,46 @@ function runExampleA() {
     console.log('  [A-2: Synchronous] Main execution ends (Call Stack empty)');
   });
 }
+
+// ==============================================================================
+// EXAMPLE (B): Nested Callbacks & I/O Phase Progression
+// Demonstrates:
+// 1. Inside an async callback, nested microtasks drain IMMEDIATELY when the
+//    callback finishes, before moving to the next macrotask.
+// 2. Within an I/O callback (Poll Phase), setImmediate (Check Phase) ALWAYS
+//    executes before setTimeout (Timers Phase of the next loop iteration).
+// ==============================================================================
+function runExampleB() {
+  return runInFreshTick(() => {
+    console.log('\n==================================================================');
+    console.log('  EXAMPLE (B): NESTED CALLBACKS & I/O PROGRESSION                ');
+    console.log('  (Poll Phase -> Nested Microtasks -> Check Phase -> Timers)     ');
+    console.log('==================================================================');
+
+    // Read current file to ensure we enter the Poll Phase
+    fs.readFile(__filename, () => {
+      console.log('  [B-1: Poll Phase] fs.readFile I/O callback starts executing');
+
+      // Schedule Timers Macrotask (will execute in Timers phase of next loop)
+      setTimeout(() => {
+        console.log('  [B-6: Next Loop - Timers] setTimeout(0ms) executed (Loop iteration +1)');
+      }, 0);
+
+      // Schedule Check Macrotask (executes immediately in Check phase right after Poll)
+      setImmediate(() => {
+        console.log('  [B-5: Check Phase] setImmediate executed (Poll -> Check transition)');
+      });
+
+      // Schedule Nested Microtasks inside the I/O callback
+      process.nextTick(() => {
+        console.log('  [B-3: Nested Microtask] nextTick inside I/O callback drains first');
+      });
+
+      Promise.resolve().then(() => {
+        console.log('  [B-4: Nested Microtask] Promise.then inside I/O callback drains next');
+      });
+
+      console.log('  [B-2: Poll Phase] fs.readFile callback finished; draining microtasks...');
+    });
+  });
+}
