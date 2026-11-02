@@ -61,3 +61,25 @@ Exp-06_GraphQL-API/
    ```bash
    npm install
    ```
+
+---
+
+## Running the Application
+
+Start the server using:
+```bash
+npm start
+```
+Or directly with Node:
+```bash
+node index.js
+```
+
+### Console Output:
+```text
+====================================================
+🚀 Experiment 6 GraphQL Server is running!
+📡 URL: http://localhost:4000/
+🎯 GraphQL Endpoint: http://localhost:4000/graphql
+====================================================
+```
