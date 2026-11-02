@@ -47,3 +47,23 @@ Node.js is a single-threaded runtime environment built on Chrome's V8 JavaScript
    Dedicated entirely to executing callbacks scheduled via `setImmediate()`.
 6. **Close Callbacks Phase**:
    Executes cleanup and teardown events, such as `socket.on('close', ...)`.
+
+---
+
+### Microtask Queues vs. Macrotask Queues
+
+In Node.js, asynchronous operations are divided into **Macrotasks** (event loop phase tasks) and **Microtasks** (immediate priority tasks).
+
+Microtasks are **not** managed by libuv; they are processed by Node.js and V8:
+1. **`process.nextTick` Queue** (Node.js internal queue):
+   - Highest priority among asynchronous tasks.
+   - Executes immediately after the currently running JavaScript operation finishes on the Call Stack, before any other microtasks or macrotasks.
+2. **Promise Microtask Queue** (V8 Microtask Queue):
+   - Holds callbacks from resolved/rejected Promises (`.then`, `.catch`, `.finally`) and `queueMicrotask()`.
+   - Drained immediately after the `nextTick` queue becomes completely empty.
+
+> **Crucial Rule**:
+> Microtask queues drain:
+> - Immediately after synchronous script execution empties the Call Stack.
+> - Immediately after each individual callback completes, before the Event Loop transitions to the next callback or phase.
+
