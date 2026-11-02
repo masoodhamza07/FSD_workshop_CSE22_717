@@ -1,0 +1,22 @@
+{
+  "name": "graphql-api-demo",
+  "version": "1.0.0",
+  "description": "Experiment 6: Basic GraphQL API using Express and graphql-http",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "graphql",
+    "express",
+    "api",
+    "workshop"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "graphql": "^16.8.1",
+    "graphql-http": "^1.22.1"
+  }
+}
