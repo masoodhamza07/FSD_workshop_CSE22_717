@@ -129,3 +129,28 @@ class DOMElement extends EventEmitter {
     return `<${this.tagName}${this.id ? ` id="${this.id}"` : ''}>`;
   }
 }
+
+// ==============================================================================
+// Driver Code / Demonstration
+// ==============================================================================
+
+console.log('==================================================================');
+console.log('        EXPERIMENT 2: SIMULATE DOM-LIKE EVENT HANDLING            ');
+console.log('==================================================================');
+
+// Step 1: Create simulated DOM hierarchy:
+// <FORM id="login-form">
+//    ├── <INPUT id="username-input" />
+//    └── <BUTTON id="submit-btn" />
+console.log('\n--- 1. Building Simulated DOM Tree ---');
+const form = new DOMElement('form', 'login-form');
+const input = new DOMElement('input', 'username-input');
+const button = new DOMElement('button', 'submit-btn');
+
+form.appendChild(input);
+form.appendChild(button);
+
+console.log(`Created elements:`);
+console.log(`  Parent:  ${form}`);
+console.log(`  Child 1: ${input} (child of ${form})`);
+console.log(`  Child 2: ${button} (child of ${form})`);
