@@ -194,3 +194,10 @@ form.addEventListener('submit', (e) => {
 });
 
 console.log('All event listeners successfully registered.');
+
+// Step 3: Simulate 'input' Event
+console.log('\n--- 3. Simulating "input" Event on <input#username-input> ---');
+input.value = 'john_doe';
+const inputEvent = new DOMEvent('input', { value: input.value }, true);
+console.log(`Dispatching 'input' event from ${input}...`);
+input.dispatchEvent(inputEvent);
