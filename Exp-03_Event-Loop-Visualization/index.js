@@ -201,3 +201,6 @@ async function main() {
   console.log('*                   EXPERIMENT 3 COMPLETED                       *');
   console.log('******************************************************************\n');
 }
+
+// Start visualization
+main();
