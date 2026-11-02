@@ -30,3 +30,51 @@ In client-side JavaScript (browser environment), the DOM event system governs us
    Signals that the default browser action should not be executed (e.g., stopping form submission or preventing page reload).
 
 ---
+
+## Code Explanation
+
+1. **`DOMEvent` Class**:
+   Represents the event object. Stores metadata including `type`, `detail`, `target`, `currentTarget`, `bubbles`, and state flags `propagationStopped` and `defaultPrevented`. Provides `stopPropagation()` and `preventDefault()` methods.
+
+2. **`DOMElement` Class**:
+   Extends `EventEmitter` to simulate a DOM element:
+   - Holds attributes: `tagName`, `id`, `parentElement`, `children`, and `value`.
+   - `appendChild(child)`: Sets up parent-child pointer relationships.
+   - `addEventListener(event, listener)`: Wraps `this.on()`.
+   - `removeEventListener(event, listener)`: Wraps `this.removeListener()`.
+   - `dispatchEvent(event)`:
+     - Sets `event.target` (if not already set).
+     - Sets `event.currentTarget` to `this`.
+     - Calls `this.emit(event.type, event)` to run local listeners.
+     - Checks `if (event.bubbles && !event.propagationStopped && this.parentElement)`: If true, delegates to `this.parentElement.dispatchEvent(event)`, triggering recursive upward bubbling.
+
+3. **Simulated Scenarios**:
+   - **DOM Hierarchy**: A `<FORM id="login-form">` containing `<INPUT id="username-input">` and `<BUTTON id="submit-btn">`.
+   - **Input Event**: Typing into the input field triggers the input's listener, and bubbles up to the form listener.
+   - **Click Event & Bubbling**: Clicking the button triggers the button's listener (`currentTarget = BUTTON`), then bubbles to the form (`currentTarget = FORM`).
+   - **Halting Bubbling**: A listener calls `e.stopPropagation()`; the form does not receive the event.
+   - **Removing Listener**: Using `removeEventListener` detaches the stopping listener; subsequent clicks bubble to the form again.
+   - **Submit & preventDefault**: Submitting invalid form data triggers `e.preventDefault()`, which returns `false` to the caller.
+
+---
+
+## How to Run
+
+### Prerequisites
+- Node.js installed (v14.x or higher)
+
+### Steps
+1. Navigate to the experiment directory:
+   ```bash
+   cd Exp-02_DOM-Event-Handling
+   ```
+2. Run the script:
+   ```bash
+   node index.js
+   ```
+   *Or via npm:*
+   ```bash
+   npm start
+   ```
+
+---
