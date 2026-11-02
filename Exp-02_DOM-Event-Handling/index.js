@@ -154,3 +154,43 @@ console.log(`Created elements:`);
 console.log(`  Parent:  ${form}`);
 console.log(`  Child 1: ${input} (child of ${form})`);
 console.log(`  Child 2: ${button} (child of ${form})`);
+
+// Step 2: Register Event Listeners
+console.log('\n--- 2. Registering Event Listeners (addEventListener) ---');
+
+// Listener for input on <input>
+input.addEventListener('input', (e) => {
+  console.log(`  [Listener on ${e.currentTarget}]: Text input received -> "${e.detail.value}"`);
+  console.log(`    Target: ${e.target}, CurrentTarget: ${e.currentTarget}`);
+});
+
+// Listener for input bubbled up to <form>
+form.addEventListener('input', (e) => {
+  console.log(`  [Bubbled to ${e.currentTarget}]: Form observed child input change from ${e.target}`);
+});
+
+// Click listener on <button>
+const buttonClickListener = (e) => {
+  console.log(`  [Listener on ${e.currentTarget}]: Button was clicked!`);
+  console.log(`    Target: ${e.target}, CurrentTarget: ${e.currentTarget}`);
+};
+button.addEventListener('click', buttonClickListener);
+
+// Click listener on <form> (observes bubbled clicks)
+const formClickListener = (e) => {
+  console.log(`  [Bubbled to ${e.currentTarget}]: Form intercepted click from child ${e.target}!`);
+};
+form.addEventListener('click', formClickListener);
+
+// Submit listener on <form>
+form.addEventListener('submit', (e) => {
+  console.log(`  [Listener on ${e.currentTarget}]: Form submission triggered with payload:`, e.detail);
+  if (!e.detail.isValid) {
+    console.log('  [Validation]: Form data is invalid! Calling preventDefault()...');
+    e.preventDefault();
+  } else {
+    console.log('  [Validation]: Form data valid. Processing submission...');
+  }
+});
+
+console.log('All event listeners successfully registered.');
