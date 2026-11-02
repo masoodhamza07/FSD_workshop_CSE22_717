@@ -71,3 +71,21 @@ class DOMElement extends EventEmitter {
     child.parentElement = this;
     this.children.push(child);
   }
+
+  /**
+   * DOM-like alias for EventEmitter's .on()
+   * @param {string} eventType - e.g. 'click', 'input', 'submit'
+   * @param {Function} listener - Callback function
+   */
+  addEventListener(eventType, listener) {
+    this.on(eventType, listener);
+  }
+
+  /**
+   * DOM-like alias for EventEmitter's .removeListener()
+   * @param {string} eventType - e.g. 'click', 'input', 'submit'
+   * @param {Function} listener - Callback function reference to remove
+   */
+  removeEventListener(eventType, listener) {
+    this.removeListener(eventType, listener);
+  }
