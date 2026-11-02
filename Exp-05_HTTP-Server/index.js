@@ -72,3 +72,15 @@ const server = http.createServer((req, res) => {
             headers: req.headers
         };
         sendResponse(res, 200, 'application/json; charset=utf-8', JSON.stringify(headersResponse, null, 2));
+
+    } else {
+        // Route: Unknown route -> Return 404 Not Found
+        const notFoundResponse = {
+            error: 'Not Found',
+            message: `The requested route '${pathname}' was not found on this server.`,
+            statusCode: 404,
+            availableRoutes: ['/', '/about', '/headers']
+        };
+        sendResponse(res, 404, 'application/json; charset=utf-8', JSON.stringify(notFoundResponse, null, 2));
+    }
+});
