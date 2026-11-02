@@ -42,3 +42,38 @@ let students = [
 ];
 
 let nextId = 4;
+
+// ----------------------------------------------------------------------------
+// 2. GraphQL Schema Definition (SDL)
+// ----------------------------------------------------------------------------
+// Defines types, available queries, and mutations.
+const schema = buildSchema(`
+  # Student entity representing a workshop participant
+  type Student {
+    id: ID!
+    name: String!
+    age: Int!
+    course: String!
+  }
+
+  # Root Query: Read operations
+  type Query {
+    # Fetch all students
+    students: [Student!]!
+    
+    # Fetch a single student by unique ID
+    student(id: ID!): Student
+  }
+
+  # Root Mutation: Create, Update, Delete operations
+  type Mutation {
+    # Add a new student
+    addStudent(name: String!, age: Int!, course: String!): Student!
+    
+    # Update an existing student's details
+    updateStudent(id: ID!, name: String, age: Int, course: String): Student
+    
+    # Delete a student by ID
+    deleteStudent(id: ID!): String!
+  }
+`);
