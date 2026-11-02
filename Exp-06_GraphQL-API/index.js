@@ -24,3 +24,10 @@ const { createHandler } = require('graphql-http/lib/use/express');
 //   graphiql: true // Built-in interactive browser UI
 // }));
 // ============================================================================
+
+// Initialize Express application
+const app = express();
+const PORT = process.env.PORT || 4000;
+
+// Middleware to parse incoming JSON (optional for custom routes, graphql-http handles its own)
+app.use(express.json());
