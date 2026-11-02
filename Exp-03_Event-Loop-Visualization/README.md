@@ -30,3 +30,20 @@ Node.js is a single-threaded runtime environment built on Chrome's V8 JavaScript
 └──┤      close callbacks      │  socket.on('close', ...), cleanups
    └───────────────────────────┘
 ```
+
+### Event Loop Phases (libuv)
+
+1. **Timers Phase**:
+   Executes callbacks scheduled by `setTimeout()` and `setInterval()` whose threshold has elapsed.
+2. **Pending Callbacks Phase**:
+   Executes I/O callbacks deferred from the previous loop iteration (such as specific system-level errors like `ECONNREFUSED`).
+3. **Idle, Prepare Phase**:
+   Used exclusively by libuv for internal housekeeping between phases.
+4. **Poll Phase**:
+   - Calculates how long it should block and wait for I/O events.
+   - Processes events in the poll queue (incoming network packets, file reads, new connections).
+   - If timers are ready or `setImmediate` is scheduled, the poll phase wraps up and advances.
+5. **Check Phase**:
+   Dedicated entirely to executing callbacks scheduled via `setImmediate()`.
+6. **Close Callbacks Phase**:
+   Executes cleanup and teardown events, such as `socket.on('close', ...)`.
