@@ -124,3 +124,24 @@ const root = {
     students.push(newStudent);
     return newStudent;
   },
+
+  // Mutation: Update existing student
+  updateStudent: ({ id, name, age, course }) => {
+    console.log(`[GraphQL Mutation] Updating student with ID: ${id}`);
+    const studentIndex = students.findIndex((s) => s.id === id);
+    
+    if (studentIndex === -1) {
+      throw new Error(`Student with ID "${id}" not found.`);
+    }
+
+    const current = students[studentIndex];
+    const updatedStudent = {
+      ...current,
+      name: name !== undefined && name.trim() !== '' ? name.trim() : current.name,
+      age: age !== undefined && age > 0 ? Number(age) : current.age,
+      course: course !== undefined && course.trim() !== '' ? course.trim() : current.course
+    };
+
+    students[studentIndex] = updatedStudent;
+    return updatedStudent;
+  },
