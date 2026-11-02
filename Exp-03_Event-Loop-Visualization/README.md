@@ -115,3 +115,50 @@ The experiment code in `index.js` illustrates three distinct scenarios:
    ```
 
 ---
+
+## Expected Output
+
+```text
+******************************************************************
+*           EXPERIMENT 3: EVENT LOOP VISUALIZATION               *
+******************************************************************
+
+==================================================================
+  EXAMPLE (A): BASIC EXECUTION ORDER                             
+  (Call Stack -> nextTickQueue -> PromiseQueue -> Event Loop)     
+==================================================================
+  [A-1: Synchronous] Main execution begins (Call Stack)
+  [A-2: Synchronous] Main execution ends (Call Stack empty)
+  [A-3: nextTick Microtask] process.nextTick callback executed (Priority 1)
+  [A-4: Promise Microtask] Promise.then callback executed
+  [A-6: Check Phase] setImmediate callback executed
+  [A-5: Timers Phase] setTimeout(0ms) callback executed
+
+==================================================================
+  EXAMPLE (B): NESTED CALLBACKS & I/O PROGRESSION                
+  (Poll Phase -> Nested Microtasks -> Check Phase -> Timers)     
+==================================================================
+  [B-1: Poll Phase] fs.readFile I/O callback starts executing
+  [B-2: Poll Phase] fs.readFile callback finished; draining microtasks...
+  [B-3: Nested Microtask] nextTick inside I/O callback drains first
+  [B-4: Nested Microtask] Promise.then inside I/O callback drains next
+  [B-5: Check Phase] setImmediate executed (Poll -> Check transition)
+  [B-6: Next Loop - Timers] setTimeout(0ms) executed (Loop iteration +1)
+
+==================================================================
+  EXAMPLE (C): nextTick vs PROMISE MICROTASKS DEEP DIVE          
+  (Priority: nextTickQueue -> promiseMicrotaskQueue)             
+==================================================================
+  [C-1: Synchronous] Registering multiple microtasks...
+  [C-1: Synchronous] All microtasks queued. Call stack clearing now...
+  [C-2: nextTick Queue] nextTick 1 executed
+  [C-3: nextTick Queue] nextTick 2 executed
+  [C-4: Promise Queue] Promise 1 executed
+  [C-5: Promise Queue] Promise 2 executed
+  [C-6: Promise Queue] Nested Promise inside nextTick 1 executed
+  [C-7: nextTick Queue] Nested nextTick inside Promise 1 executed
+
+******************************************************************
+*                   EXPERIMENT 3 COMPLETED                       *
+******************************************************************
+```
