@@ -159,3 +159,40 @@ curl -X POST http://localhost:4000/graphql \
   }
 }
 ```
+
+---
+
+### 3. Mutation: Add a New Student
+
+#### GraphQL Mutation Syntax:
+```graphql
+mutation {
+  addStudent(name: "Diana Prince", age: 23, course: "Cybersecurity") {
+    id
+    name
+    age
+    course
+  }
+}
+```
+
+#### cURL Command:
+```bash
+curl -X POST http://localhost:4000/graphql \
+  -H "Content-Type: application/json" \
+  -d '{"query": "mutation { addStudent(name: \"Diana Prince\", age: 23, course: \"Cybersecurity\") { id name age course } }"}'
+```
+
+#### Expected Output:
+```json
+{
+  "data": {
+    "addStudent": {
+      "id": "4",
+      "name": "Diana Prince",
+      "age": 23,
+      "course": "Cybersecurity"
+    }
+  }
+}
+```
