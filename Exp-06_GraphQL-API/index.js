@@ -98,3 +98,29 @@ const root = {
     }
     return student;
   },
+
+  // Mutation: Add new student
+  addStudent: ({ name, age, course }) => {
+    console.log(`[GraphQL Mutation] Adding new student: ${name}`);
+    
+    // Basic validation
+    if (!name || name.trim() === '') {
+      throw new Error('Name is required and cannot be empty.');
+    }
+    if (age <= 0) {
+      throw new Error('Age must be a positive integer.');
+    }
+    if (!course || course.trim() === '') {
+      throw new Error('Course is required and cannot be empty.');
+    }
+
+    const newStudent = {
+      id: String(nextId++),
+      name: name.trim(),
+      age: Number(age),
+      course: course.trim()
+    };
+
+    students.push(newStudent);
+    return newStudent;
+  },
