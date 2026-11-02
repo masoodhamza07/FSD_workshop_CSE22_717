@@ -201,3 +201,9 @@ input.value = 'john_doe';
 const inputEvent = new DOMEvent('input', { value: input.value }, true);
 console.log(`Dispatching 'input' event from ${input}...`);
 input.dispatchEvent(inputEvent);
+
+// Step 4: Simulate 'click' Event with Event Bubbling
+console.log('\n--- 4. Simulating "click" Event with Normal Bubbling ---');
+const clickEvent = new DOMEvent('click', { mouseButton: 'left' }, true);
+console.log(`Dispatching 'click' event from ${button}...`);
+button.dispatchEvent(clickEvent);
