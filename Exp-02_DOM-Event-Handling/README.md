@@ -78,3 +78,70 @@ In client-side JavaScript (browser environment), the DOM event system governs us
    ```
 
 ---
+
+## Expected Output
+
+```text
+==================================================================
+        EXPERIMENT 2: SIMULATE DOM-LIKE EVENT HANDLING            
+==================================================================
+
+--- 1. Building Simulated DOM Tree ---
+Created elements:
+  Parent:  <FORM id="login-form">
+  Child 1: <INPUT id="username-input"> (child of <FORM id="login-form">)
+  Child 2: <BUTTON id="submit-btn"> (child of <FORM id="login-form">)
+
+--- 2. Registering Event Listeners (addEventListener) ---
+All event listeners successfully registered.
+
+--- 3. Simulating "input" Event on <input#username-input> ---
+Dispatching 'input' event from <INPUT id="username-input">...
+  [Listener on <INPUT id="username-input">]: Text input received -> "john_doe"
+    Target: <INPUT id="username-input">, CurrentTarget: <INPUT id="username-input">
+  [Bubbled to <FORM id="login-form">]: Form observed child input change from <INPUT id="username-input">
+
+--- 4. Simulating "click" Event with Normal Bubbling ---
+Dispatching 'click' event from <BUTTON id="submit-btn">...
+  [Listener on <BUTTON id="submit-btn">]: Button was clicked!
+    Target: <BUTTON id="submit-btn">, CurrentTarget: <BUTTON id="submit-btn">
+  [Bubbled to <FORM id="login-form">]: Form intercepted click from child <BUTTON id="submit-btn">!
+
+--- 5. Simulating "click" Event with stopPropagation() ---
+Dispatching 'click' event with stopPropagation from <BUTTON id="submit-btn">...
+  [Listener on <BUTTON id="submit-btn">]: Button was clicked!
+    Target: <BUTTON id="submit-btn">, CurrentTarget: <BUTTON id="submit-btn">
+  [Listener on <BUTTON id="submit-btn">]: Halting event bubbling!
+    [Event] stopPropagation() called on <BUTTON#submit-btn>.
+Notice: The <form> did NOT receive the bubbled click event!
+
+--- 6. Removing Listener (removeEventListener) ---
+Removing "stoppingClickListener" from <BUTTON id="submit-btn">...
+Dispatching 'click' again (bubbling restored):
+  [Listener on <BUTTON id="submit-btn">]: Button was clicked!
+    Target: <BUTTON id="submit-btn">, CurrentTarget: <BUTTON id="submit-btn">
+  [Bubbled to <FORM id="login-form">]: Form intercepted click from child <BUTTON id="submit-btn">!
+
+--- 7. Simulating "submit" Event on <form> ---
+Scenario A: Submitting invalid form (missing password)
+  [Listener on <FORM id="login-form">]: Form submission triggered with payload: { username: 'john_doe', isValid: false }
+  [Validation]: Form data is invalid! Calling preventDefault()...
+    [Event] preventDefault() called on <FORM#login-form>.
+Did submission proceed? false (preventDefault status: true)
+
+Scenario B: Submitting valid form
+  [Listener on <FORM id="login-form">]: Form submission triggered with payload: { username: 'john_doe', isValid: true }
+  [Validation]: Form data valid. Processing submission...
+Did submission proceed? true (preventDefault status: false)
+
+==================================================================
+                    EXPERIMENT 2 COMPLETED                        
+==================================================================
+```
+
+---
+
+## Key Takeaways
+- Node.js's `EventEmitter` can easily be adapted into a full DOM-like event architecture.
+- Bubbling is simply recursive dispatching along a parent reference chain until the root element is reached or `stopPropagation()` is flagged.
+- Separating `target` (origin) and `currentTarget` (handler receiver) is fundamental to event delegation patterns in modern web applications.
