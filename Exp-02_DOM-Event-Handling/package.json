@@ -1,0 +1,18 @@
+{
+  "name": "exp-02-dom-event-handling",
+  "version": "1.0.0",
+  "description": "Experiment 2: Simulate DOM-like Event Handling in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "dom-events",
+    "event-bubbling",
+    "eventemitter",
+    "fsd-workshop"
+  ],
+  "author": "FSD Workshop",
+  "license": "ISC"
+}
