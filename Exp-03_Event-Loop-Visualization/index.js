@@ -37,3 +37,19 @@
  *     and queueMicrotask(). Runs after the nextTick queue is empty.
  * ==============================================================================
  */
+
+const fs = require('fs');
+
+/**
+ * Helper to ensure an isolated macrotask context for clean execution
+ * of each demonstration scenario.
+ */
+function runInFreshTick(callback) {
+  return new Promise((resolve) => {
+    setImmediate(() => {
+      callback();
+      // Allow queues in the scenario to settle before resolving
+      setTimeout(resolve, 80);
+    });
+  });
+}
