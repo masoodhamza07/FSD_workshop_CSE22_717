@@ -184,3 +184,20 @@ function runExampleC() {
     console.log('  [C-1: Synchronous] All microtasks queued. Call stack clearing now...');
   });
 }
+
+// ==============================================================================
+// Master Orchestration: Runs each section in sequence for pedagogical clarity
+// ==============================================================================
+async function main() {
+  console.log('******************************************************************');
+  console.log('*           EXPERIMENT 3: EVENT LOOP VISUALIZATION               *');
+  console.log('******************************************************************');
+
+  await runExampleA();
+  await runExampleB();
+  await runExampleC();
+
+  console.log('\n******************************************************************');
+  console.log('*                   EXPERIMENT 3 COMPLETED                       *');
+  console.log('******************************************************************\n');
+}
