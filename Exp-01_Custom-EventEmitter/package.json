@@ -1,0 +1,16 @@
+{
+  "name": "exp-01-custom-event-emitter",
+  "version": "1.0.0",
+  "description": "Experiment 1: Custom EventEmitter in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "eventemitter",
+    "fsd-workshop"
+  ],
+  "author": "FSD Workshop",
+  "license": "ISC"
+}
