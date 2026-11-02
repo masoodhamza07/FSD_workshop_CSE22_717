@@ -159,3 +159,12 @@ const root = {
     return `Student "${deleted.name}" (ID: ${id}) deleted successfully.`;
   }
 };
+
+// ----------------------------------------------------------------------------
+// 4. Mount GraphQL Endpoint
+// ----------------------------------------------------------------------------
+// Use graphql-http createHandler as the modern recommended middleware
+app.all('/graphql', createHandler({
+  schema: schema,
+  rootValue: root
+}));
