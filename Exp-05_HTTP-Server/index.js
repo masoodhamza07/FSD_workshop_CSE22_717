@@ -97,3 +97,12 @@ server.listen(PORT, HOST, () => {
     console.log(`  - GET http://${HOST}:${PORT}/headers (Request Headers JSON)`);
     console.log(`\nWaiting for requests... (Press Ctrl+C to stop)`);
 });
+
+// Handle graceful shutdown
+process.on('SIGINT', () => {
+    console.log('\nShutting down HTTP server gracefully...');
+    server.close(() => {
+        console.log('HTTP server closed. Exiting process.');
+        process.exit(0);
+    });
+});
