@@ -1,0 +1,21 @@
+{
+  "name": "exp-03-event-loop-visualization",
+  "version": "1.0.0",
+  "description": "Experiment 3: Event Loop Visualization in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "event-loop",
+    "libuv",
+    "nextTick",
+    "promises",
+    "setImmediate",
+    "setTimeout",
+    "fsd-workshop"
+  ],
+  "author": "FSD Workshop",
+  "license": "ISC"
+}
