@@ -83,3 +83,16 @@ node index.js
 🎯 GraphQL Endpoint: http://localhost:4000/graphql
 ====================================================
 ```
+
+---
+
+## Testing the GraphQL API
+
+GraphQL requests are sent as HTTP `POST` requests to `http://localhost:4000/graphql` with a JSON body:
+```json
+{
+  "query": "..."
+}
+```
+
+You can test this using **Postman**, **Insomnia**, or **cURL**.
