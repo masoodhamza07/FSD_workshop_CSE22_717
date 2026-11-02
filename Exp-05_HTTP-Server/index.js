@@ -63,3 +63,12 @@ const server = http.createServer((req, res) => {
             currentTime: new Date().toISOString()
         };
         sendResponse(res, 200, 'application/json; charset=utf-8', JSON.stringify(serverInfo, null, 2));
+
+    } else if (req.method === 'GET' && pathname === '/headers') {
+        // Route: '/headers' -> Return all received request headers as JSON
+        const headersResponse = {
+            message: 'Incoming HTTP Request Headers',
+            clientIp: req.socket.remoteAddress,
+            headers: req.headers
+        };
+        sendResponse(res, 200, 'application/json; charset=utf-8', JSON.stringify(headersResponse, null, 2));
