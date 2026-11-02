@@ -30,3 +30,13 @@ function sendResponse(res, statusCode, contentType, body) {
     });
     res.end(body);
 }
+
+// Create the HTTP server
+const server = http.createServer((req, res) => {
+    // 1. Log request details to console
+    const timestamp = new Date().toISOString();
+    console.log(`\n==================== INCOMING REQUEST ====================`);
+    console.log(`[${timestamp}] Method: ${req.method} | URL: ${req.url}`);
+    console.log('Headers:');
+    console.log(JSON.stringify(req.headers, null, 2));
+    console.log(`==========================================================\n`);
