@@ -221,3 +221,12 @@ const stopClickEvent = new DOMEvent('click', { mouseButton: 'left' }, true);
 console.log(`Dispatching 'click' event with stopPropagation from ${button}...`);
 button.dispatchEvent(stopClickEvent);
 console.log('Notice: The <form> did NOT receive the bubbled click event!');
+
+// Step 6: Simulate removeEventListener
+console.log('\n--- 6. Removing Listener (removeEventListener) ---');
+console.log(`Removing "stoppingClickListener" from ${button}...`);
+button.removeEventListener('click', stoppingClickListener);
+
+const clickAfterRemoval = new DOMEvent('click', { mouseButton: 'left' }, true);
+console.log(`Dispatching 'click' again (bubbling restored):`);
+button.dispatchEvent(clickAfterRemoval);
