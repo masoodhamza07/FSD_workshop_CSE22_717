@@ -168,3 +168,44 @@ app.all('/graphql', createHandler({
   schema: schema,
   rootValue: root
 }));
+
+// Provide a friendly landing page at root with instructions & query examples
+app.get('/', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Experiment 6: Basic GraphQL API</title>
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 40px; line-height: 1.6; color: #333; }
+        h1 { color: #2e7d32; }
+        code, pre { background: #f4f4f4; padding: 4px 8px; border-radius: 4px; font-family: Menlo, Monaco, Consolas, monospace; }
+        pre { padding: 16px; overflow-x: auto; }
+        .badge { display: inline-block; padding: 4px 10px; background: #e0f2fe; color: #0284c7; border-radius: 9999px; font-size: 12px; font-weight: bold; }
+        ul { padding-left: 20px; }
+      </style>
+    </head>
+    <body>
+      <span class="badge">GraphQL API Active</span>
+      <h1>🎓 Experiment 6: Basic GraphQL API Server</h1>
+      <p>The GraphQL endpoint is available at <code>POST /graphql</code>.</p>
+      
+      <h2>How to Query this Endpoint:</h2>
+      <p>Send a POST request with JSON payload <code>{ "query": "..." }</code>.</p>
+      
+      <h3>Example curl command:</h3>
+      <pre>curl -X POST http://localhost:${PORT}/graphql \\
+  -H "Content-Type: application/json" \\
+  -d '{"query": "{ students { id name age course } }"}'</pre>
+
+      <h3>Available Operations:</h3>
+      <ul>
+        <li><strong>Query:</strong> <code>students</code> (list all), <code>student(id: "1")</code> (get one)</li>
+        <li><strong>Mutation:</strong> <code>addStudent</code>, <code>updateStudent</code>, <code>deleteStudent</code></li>
+      </ul>
+      <p>Refer to <code>README.md</code> for complete sample queries, mutations, and testing steps.</p>
+    </body>
+    </html>
+  `);
+});
