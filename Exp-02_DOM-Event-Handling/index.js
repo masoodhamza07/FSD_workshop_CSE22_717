@@ -89,3 +89,43 @@ class DOMElement extends EventEmitter {
   removeEventListener(eventType, listener) {
     this.removeListener(eventType, listener);
   }
+
+  /**
+   * Dispatches an event to this element, triggering listeners, and
+   * recursively bubbles up to parent elements if bubbling is enabled.
+   * @param {DOMEvent|string} event
+   * @returns {boolean} False if event was cancelled with preventDefault(), true otherwise.
+   */
+  dispatchEvent(event) {
+    // If a simple string was passed, wrap it into a DOMEvent
+    if (typeof event === 'string') {
+      event = new DOMEvent(event);
+    }
+
+    // Set the initial event target
+    if (!event.target) {
+      event.target = this;
+    }
+
+    // Update current target to the element currently handling the event
+    event.currentTarget = this;
+
+    // Trigger local listeners registered on this element
+    this.emit(event.type, event);
+
+    // Event Bubbling Phase:
+    // If bubbling is allowed, propagation hasn't been stopped, and a parent exists:
+    if (event.bubbles && !event.propagationStopped && this.parentElement) {
+      this.parentElement.dispatchEvent(event);
+    }
+
+    return !event.defaultPrevented;
+  }
+
+  /**
+   * Returns string representation of the DOM element
+   */
+  toString() {
+    return `<${this.tagName}${this.id ? ` id="${this.id}"` : ''}>`;
+  }
+}
