@@ -40,3 +40,7 @@ const server = http.createServer((req, res) => {
     console.log('Headers:');
     console.log(JSON.stringify(req.headers, null, 2));
     console.log(`==========================================================\n`);
+
+    // Parse URL path (ignoring query parameters)
+    const parsedUrl = new URL(req.url, `http://${req.headers.host || `${HOST}:${PORT}`}`);
+    const pathname = parsedUrl.pathname;
