@@ -31,3 +31,14 @@ const PORT = process.env.PORT || 4000;
 
 // Middleware to parse incoming JSON (optional for custom routes, graphql-http handles its own)
 app.use(express.json());
+
+// ----------------------------------------------------------------------------
+// 1. In-Memory Data Store
+// ----------------------------------------------------------------------------
+let students = [
+  { id: '1', name: 'Alice Johnson', age: 20, course: 'Computer Science' },
+  { id: '2', name: 'Bob Smith', age: 22, course: 'Information Technology' },
+  { id: '3', name: 'Charlie Brown', age: 21, course: 'Data Science' }
+];
+
+let nextId = 4;
