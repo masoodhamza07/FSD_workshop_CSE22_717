@@ -230,3 +230,22 @@ button.removeEventListener('click', stoppingClickListener);
 const clickAfterRemoval = new DOMEvent('click', { mouseButton: 'left' }, true);
 console.log(`Dispatching 'click' again (bubbling restored):`);
 button.dispatchEvent(clickAfterRemoval);
+
+// Step 7: Simulate Form 'submit' Event with preventDefault()
+console.log('\n--- 7. Simulating "submit" Event on <form> ---');
+
+// Case A: Invalid Submission
+console.log('Scenario A: Submitting invalid form (missing password)');
+const invalidSubmitEvent = new DOMEvent('submit', { username: 'john_doe', isValid: false });
+const allowedA = form.dispatchEvent(invalidSubmitEvent);
+console.log(`Did submission proceed? ${allowedA} (preventDefault status: ${invalidSubmitEvent.defaultPrevented})`);
+
+// Case B: Valid Submission
+console.log('\nScenario B: Submitting valid form');
+const validSubmitEvent = new DOMEvent('submit', { username: 'john_doe', isValid: true });
+const allowedB = form.dispatchEvent(validSubmitEvent);
+console.log(`Did submission proceed? ${allowedB} (preventDefault status: ${validSubmitEvent.defaultPrevented})`);
+
+console.log('\n==================================================================');
+console.log('                    EXPERIMENT 2 COMPLETED                        ');
+console.log('==================================================================\n');
