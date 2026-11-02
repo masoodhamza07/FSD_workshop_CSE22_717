@@ -162,3 +162,23 @@ The experiment code in `index.js` illustrates three distinct scenarios:
 *                   EXPERIMENT 3 COMPLETED                       *
 ******************************************************************
 ```
+
+---
+
+## Explanation of Execution Order (Why this order?)
+
+| Order | Event / Callback | Reason |
+| :--- | :--- | :--- |
+| **1st** | Synchronous Code | The V8 engine executes all synchronous statements directly on the Call Stack. |
+| **2nd** | `process.nextTick` | As soon as the Call Stack is empty, Node.js prioritizes the `nextTickQueue` before any other queue. |
+| **3rd** | `Promise.then` | Once the `nextTickQueue` is empty, V8 drains its microtask queue (Promises and `queueMicrotask`). |
+| **4th** | In I/O: `setImmediate` | The I/O callback executes in the **Poll Phase**. The next phase in the loop order is the **Check Phase**, where `setImmediate` resides. |
+| **5th** | In I/O: `setTimeout(0)` | Requires completing the current loop iteration (Poll $\rightarrow$ Check $\rightarrow$ Close) and starting the next iteration at the **Timers Phase**. |
+
+---
+
+## Key Takeaways
+- Synchronous code always runs to completion before asynchronous events are processed.
+- `process.nextTick()` does not wait for an Event Loop iteration; it preempts the Event Loop.
+- Inside an I/O lifecycle, `setImmediate` is guaranteed to run before `setTimeout(0)`.
+- Excessive recursive `process.nextTick()` calls can starve the Event Loop ("starvation"), preventing I/O and timers from ever running.
