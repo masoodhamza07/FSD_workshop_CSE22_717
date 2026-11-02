@@ -209,3 +209,14 @@ app.get('/', (req, res) => {
     </html>
   `);
 });
+
+// ----------------------------------------------------------------------------
+// 5. Start Express Server
+// ----------------------------------------------------------------------------
+app.listen(PORT, () => {
+  console.log('====================================================');
+  console.log(`🚀 Experiment 6 GraphQL Server is running!`);
+  console.log(`📡 URL: http://localhost:${PORT}/`);
+  console.log(`🎯 GraphQL Endpoint: http://localhost:${PORT}/graphql`);
+  console.log('====================================================');
+});
