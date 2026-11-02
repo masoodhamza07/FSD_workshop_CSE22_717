@@ -294,3 +294,8 @@ curl -X POST http://localhost:4000/graphql \
   }
 }
 ```
+
+---
+
+## Conclusion
+In this experiment, we successfully created a standalone GraphQL API using Node.js and Express. We learned how to define a schema with custom object types, configure query and mutation resolvers, and execute requests to fetch and manipulate student data via a single `/graphql` endpoint.
