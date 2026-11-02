@@ -67,3 +67,29 @@ Microtasks are **not** managed by libuv; they are processed by Node.js and V8:
 > - Immediately after synchronous script execution empties the Call Stack.
 > - Immediately after each individual callback completes, before the Event Loop transitions to the next callback or phase.
 
+---
+
+## Code Explanation
+
+The experiment code in `index.js` illustrates three distinct scenarios:
+
+### 1. Example (A): Basic Execution Order
+- **Synchronous Statements**: Execute immediately on the V8 Call Stack (`A-1`, `A-2`).
+- **`process.nextTick`**: Drains as soon as the Call Stack empties (`A-3`).
+- **`Promise.resolve().then()`**: Drains right after `nextTick` finishes (`A-4`).
+- **Macrotasks**: The event loop checks the Timers and Check phases (`A-5`, `A-6`).
+
+### 2. Example (B): Nested Callbacks & I/O Phase Progression
+- An asynchronous file read (`fs.readFile`) places callback execution squarely within the **Poll Phase** (`B-1`).
+- Inside the Poll Phase:
+  - Nested microtasks (`nextTick` and `Promise.then`) drain immediately upon completion of the synchronous callback body (`B-3`, `B-4`).
+  - Next, the Event Loop naturally steps forward into the **Check Phase**, running `setImmediate` (`B-5`).
+  - Finally, `setTimeout(..., 0)` runs in the **Timers Phase of the *next* loop iteration** (`B-6`).
+  - *Takeaway*: Inside any I/O callback, `setImmediate` will **always** execute before `setTimeout(..., 0)`.
+
+### 3. Example (C): `nextTick` vs Promise Microtasks Deep Dive
+- Illustrates interleaving and nesting of microtasks:
+  - `process.nextTick` callbacks (`C-2`, `C-3`) are drained completely first.
+  - Then the Promise queue executes (`C-4`, `C-5`).
+  - A Promise scheduling a `nextTick` (`C-7`) and a `nextTick` scheduling a Promise (`C-6`) demonstrate that Node returns to drain `nextTick` before proceeding to macrotasks.
+
