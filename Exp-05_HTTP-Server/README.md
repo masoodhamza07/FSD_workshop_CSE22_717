@@ -28,3 +28,26 @@ Every HTTP interaction consists of:
    - **Status Code**: 3-digit numerical indicator of request result (e.g., `200 OK`, `404 Not Found`).
    - **Response Headers**: Metadata sent by the server back to client (e.g., `Content-Type: application/json`, `Date`, custom headers like `X-Custom-Header`).
    - **Body**: The actual payload (HTML, plain text, JSON, etc.).
+
+---
+
+## Code
+
+File: `index.js`
+
+```javascript
+/**
+ * Experiment 5: Basic HTTP Server using Node.js 'http' Module
+ * 
+ * Demonstrates:
+ * 1. Creating an HTTP server with http.createServer()
+ * 2. Listening on port 3000
+ * 3. Inspecting IncomingMessage (req) object: method, url, headers
+ * 4. Constructing ServerResponse (res) object: status code, custom headers, Date, body
+ * 5. Routing:
+ *    - GET /        -> Returns 'Hello World' (text/plain, status 200)
+ *    - GET /about   -> Returns server details JSON (application/json, status 200)
+ *    - GET /headers -> Returns request headers JSON (application/json, status 200)
+ *    - Unknown URLs -> Returns 404 Not Found
+ * 6. Console request logging
+ */
