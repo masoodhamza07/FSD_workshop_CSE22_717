@@ -19,3 +19,14 @@ const http = require('http');
 // Configuration
 const PORT = process.env.PORT || 3000;
 const HOST = 'localhost';
+
+// Helper function to send standard responses with required headers
+function sendResponse(res, statusCode, contentType, body) {
+    res.writeHead(statusCode, {
+        'Content-Type': contentType,
+        'X-Custom-Header': 'FSD-Workshop-HTTP-Server-v1.0',
+        'Date': new Date().toUTCString(),
+        'X-Powered-By': 'Node.js'
+    });
+    res.end(body);
+}
