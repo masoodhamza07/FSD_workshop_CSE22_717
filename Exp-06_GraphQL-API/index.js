@@ -145,3 +145,17 @@ const root = {
     students[studentIndex] = updatedStudent;
     return updatedStudent;
   },
+
+  // Mutation: Delete student by ID
+  deleteStudent: ({ id }) => {
+    console.log(`[GraphQL Mutation] Deleting student with ID: ${id}`);
+    const studentIndex = students.findIndex((s) => s.id === id);
+    
+    if (studentIndex === -1) {
+      throw new Error(`Student with ID "${id}" not found.`);
+    }
+
+    const deleted = students.splice(studentIndex, 1)[0];
+    return `Student "${deleted.name}" (ID: ${id}) deleted successfully.`;
+  }
+};
