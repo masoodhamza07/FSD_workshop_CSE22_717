@@ -212,3 +212,86 @@ Headers:
 }
 ==========================================================
 ```
+
+### 2. Client / Browser Responses
+
+#### A. Request to `/` (Root Route)
+- **HTTP Status**: `200 OK`
+- **Response Headers**:
+  ```http
+  HTTP/1.1 200 OK
+  Content-Type: text/plain; charset=utf-8
+  X-Custom-Header: FSD-Workshop-HTTP-Server-v1.0
+  Date: Fri, 11 Sep 2026 06:20:00 GMT
+  X-Powered-By: Node.js
+  ```
+- **Response Body**:
+  ```text
+  Hello World
+  ```
+
+#### B. Request to `/about`
+- **HTTP Status**: `200 OK`
+- **Response Headers**:
+  ```http
+  HTTP/1.1 200 OK
+  Content-Type: application/json; charset=utf-8
+  X-Custom-Header: FSD-Workshop-HTTP-Server-v1.0
+  Date: Fri, 11 Sep 2026 06:20:00 GMT
+  ```
+- **Response Body**:
+  ```json
+  {
+    "name": "Basic HTTP Server",
+    "workshop": "Full Stack Development Workshop-I",
+    "experiment": "Experiment 5",
+    "status": "running",
+    "nodeVersion": "v24.14.1",
+    "platform": "darwin",
+    "uptimeSeconds": 15,
+    "currentTime": "2026-09-11T06:20:00.000Z"
+  }
+  ```
+
+#### C. Request to `/headers`
+- **HTTP Status**: `200 OK`
+- **Response Headers**:
+  ```http
+  HTTP/1.1 200 OK
+  Content-Type: application/json; charset=utf-8
+  X-Custom-Header: FSD-Workshop-HTTP-Server-v1.0
+  ```
+- **Response Body**:
+  ```json
+  {
+    "message": "Incoming HTTP Request Headers",
+    "clientIp": "::1",
+    "headers": {
+      "host": "localhost:3000",
+      "user-agent": "Mozilla/5.0 ...",
+      "accept": "text/html,application/xhtml+xml..."
+    }
+  }
+  ```
+
+#### D. Request to `/unknown` (404 Route)
+- **HTTP Status**: `404 Not Found`
+- **Response Headers**:
+  ```http
+  HTTP/1.1 404 Not Found
+  Content-Type: application/json; charset=utf-8
+  X-Custom-Header: FSD-Workshop-HTTP-Server-v1.0
+  ```
+- **Response Body**:
+  ```json
+  {
+    "error": "Not Found",
+    "message": "The requested route '/unknown' was not found on this server.",
+    "statusCode": 404,
+    "availableRoutes": [
+      "/",
+      "/about",
+      "/headers"
+    ]
+  }
+  ```
