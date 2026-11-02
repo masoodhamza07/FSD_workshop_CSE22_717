@@ -183,3 +183,32 @@ process.on('SIGINT', () => {
      ```
 
 4. Press `Ctrl + C` in the terminal to gracefully stop the server.
+
+---
+
+## Expected Output
+
+### 1. Terminal Console Output
+When the server starts and receives requests:
+```text
+====================================================
+  EXPERIMENT 5: BASIC HTTP SERVER IS RUNNING
+====================================================
+Server URL: http://localhost:3000
+Endpoints:
+  - GET http://localhost:3000/        (Hello World)
+  - GET http://localhost:3000/about   (Server Details JSON)
+  - GET http://localhost:3000/headers (Request Headers JSON)
+
+Waiting for requests... (Press Ctrl+C to stop)
+
+==================== INCOMING REQUEST ====================
+[2026-09-11T11:50:00.000Z] Method: GET | URL: /
+Headers:
+{
+  "host": "localhost:3000",
+  "user-agent": "curl/8.7.1",
+  "accept": "*/*"
+}
+==========================================================
+```
