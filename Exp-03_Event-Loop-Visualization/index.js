@@ -53,3 +53,40 @@ function runInFreshTick(callback) {
     });
   });
 }
+
+// ==============================================================================
+// EXAMPLE (A): Basic Ordering
+// Demonstrates: Synchronous -> nextTick -> Promise -> Timers (setTimeout) / Check (setImmediate)
+// ==============================================================================
+function runExampleA() {
+  return runInFreshTick(() => {
+    console.log('\n==================================================================');
+    console.log('  EXAMPLE (A): BASIC EXECUTION ORDER                             ');
+    console.log('  (Call Stack -> nextTickQueue -> PromiseQueue -> Event Loop)     ');
+    console.log('==================================================================');
+
+    console.log('  [A-1: Synchronous] Main execution begins (Call Stack)');
+
+    // 1. Schedule Timer (Timers Phase)
+    setTimeout(() => {
+      console.log('  [A-5: Timers Phase] setTimeout(0ms) callback executed');
+    }, 0);
+
+    // 2. Schedule Immediate (Check Phase)
+    setImmediate(() => {
+      console.log('  [A-6: Check Phase] setImmediate callback executed');
+    });
+
+    // 3. Schedule Promise Microtask (Promise Microtask Queue)
+    Promise.resolve().then(() => {
+      console.log('  [A-4: Promise Microtask] Promise.then callback executed');
+    });
+
+    // 4. Schedule nextTick Microtask (nextTick Queue)
+    process.nextTick(() => {
+      console.log('  [A-3: nextTick Microtask] process.nextTick callback executed (Priority 1)');
+    });
+
+    console.log('  [A-2: Synchronous] Main execution ends (Call Stack empty)');
+  });
+}
