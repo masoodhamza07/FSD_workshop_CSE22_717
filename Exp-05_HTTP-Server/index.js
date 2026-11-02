@@ -44,3 +44,22 @@ const server = http.createServer((req, res) => {
     // Parse URL path (ignoring query parameters)
     const parsedUrl = new URL(req.url, `http://${req.headers.host || `${HOST}:${PORT}`}`);
     const pathname = parsedUrl.pathname;
+
+    // 2. Handle Routes
+    if (req.method === 'GET' && pathname === '/') {
+        // Route: Root '/' -> Respond with 'Hello World'
+        sendResponse(res, 200, 'text/plain; charset=utf-8', 'Hello World');
+
+    } else if (req.method === 'GET' && pathname === '/about') {
+        // Route: '/about' -> Return JSON with server info
+        const serverInfo = {
+            name: 'Basic HTTP Server',
+            workshop: 'Full Stack Development Workshop-I',
+            experiment: 'Experiment 5',
+            status: 'running',
+            nodeVersion: process.version,
+            platform: process.platform,
+            uptimeSeconds: Math.floor(process.uptime()),
+            currentTime: new Date().toISOString()
+        };
+        sendResponse(res, 200, 'application/json; charset=utf-8', JSON.stringify(serverInfo, null, 2));
