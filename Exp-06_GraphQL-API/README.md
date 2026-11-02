@@ -260,3 +260,37 @@ curl -X POST http://localhost:4000/graphql \
   }
 }
 ```
+
+---
+
+### 6. Query Error Handling (Student Not Found)
+
+#### cURL Command:
+```bash
+curl -X POST http://localhost:4000/graphql \
+  -H "Content-Type: application/json" \
+  -d '{"query": "query { student(id: \"999\") { id name } }"}'
+```
+
+#### Expected Output:
+```json
+{
+  "errors": [
+    {
+      "message": "Student with ID \"999\" not found.",
+      "locations": [
+        {
+          "line": 1,
+          "column": 9
+        }
+      ],
+      "path": [
+        "student"
+      ]
+    }
+  ],
+  "data": {
+    "student": null
+  }
+}
+```
