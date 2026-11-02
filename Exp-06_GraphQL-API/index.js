@@ -77,3 +77,24 @@ const schema = buildSchema(`
     deleteStudent(id: ID!): String!
   }
 `);
+
+// ----------------------------------------------------------------------------
+// 3. Root Resolvers
+// ----------------------------------------------------------------------------
+// Resolvers provide the logic to fulfill GraphQL queries and mutations.
+const root = {
+  // Query: Get all students
+  students: () => {
+    console.log('[GraphQL Query] Fetching all students');
+    return students;
+  },
+
+  // Query: Get single student by ID
+  student: ({ id }) => {
+    console.log(`[GraphQL Query] Fetching student with ID: ${id}`);
+    const student = students.find((s) => s.id === id);
+    if (!student) {
+      throw new Error(`Student with ID "${id}" not found.`);
+    }
+    return student;
+  },
