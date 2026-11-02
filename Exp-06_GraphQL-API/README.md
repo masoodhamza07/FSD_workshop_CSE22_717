@@ -32,3 +32,18 @@ GraphQL is an open-source query language for APIs and a runtime for fulfilling t
   - **Mutation**: Write operations that create, update, or delete data (equivalent to `POST`, `PUT`, `DELETE` in REST).
   - **Subscription**: Real-time event streams via WebSockets.
 - **Resolvers**: Functions that produce the payload for a corresponding schema field. When a client executes a query or mutation, GraphQL executes the resolver function for each requested field.
+
+---
+
+## Architecture & Code Structure
+
+```
+Exp-06_GraphQL-API/
+├── package.json        # Project metadata and dependencies (express, graphql, graphql-http)
+├── index.js            # Express server, GraphQL schema, resolvers, and route mounting
+└── README.md           # Documentation, theory, guide, and testing examples
+```
+
+### Modern Approach vs Legacy `express-graphql`
+- **Modern standard**: The official GraphQL foundation recommends using [`graphql-http`](https://github.com/graphql/graphql-http) for HTTP server bindings as it adheres to the latest GraphQL over HTTP specification.
+- **Legacy approach**: `express-graphql` was historically popular and used `graphqlHTTP({ schema, rootValue, graphiql: true })`. Both approaches follow the same schema and resolver design patterns.
