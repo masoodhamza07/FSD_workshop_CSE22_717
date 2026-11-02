@@ -49,3 +49,25 @@ class DOMEvent {
     console.log(`    [Event] preventDefault() called on <${this.currentTarget.tagName}#${this.currentTarget.id}>.`);
   }
 }
+
+/**
+ * DOMElement simulates a DOM node with parent-child hierarchy and event capabilities.
+ */
+class DOMElement extends EventEmitter {
+  constructor(tagName, id = '') {
+    super();
+    this.tagName = tagName.toUpperCase();
+    this.id = id;
+    this.parentElement = null;             // Reference to parent node for bubbling
+    this.children = [];
+    this.value = '';                       // Simulated attribute for input elements
+  }
+
+  /**
+   * Appends a child element and establishes parent-child linkage.
+   * @param {DOMElement} child
+   */
+  appendChild(child) {
+    child.parentElement = this;
+    this.children.push(child);
+  }
