@@ -13,3 +13,9 @@
  *    - Unknown URLs -> Returns 404 Not Found
  * 6. Console request logging
  */
+
+const http = require('http');
+
+// Configuration
+const PORT = process.env.PORT || 3000;
+const HOST = 'localhost';
