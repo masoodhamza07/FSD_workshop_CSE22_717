@@ -207,3 +207,17 @@ console.log('\n--- 4. Simulating "click" Event with Normal Bubbling ---');
 const clickEvent = new DOMEvent('click', { mouseButton: 'left' }, true);
 console.log(`Dispatching 'click' event from ${button}...`);
 button.dispatchEvent(clickEvent);
+
+// Step 5: Simulate Event with stopPropagation()
+console.log('\n--- 5. Simulating "click" Event with stopPropagation() ---');
+// Add a new click listener to button that stops propagation
+const stoppingClickListener = (e) => {
+  console.log(`  [Listener on ${e.currentTarget}]: Halting event bubbling!`);
+  e.stopPropagation();
+};
+button.addEventListener('click', stoppingClickListener);
+
+const stopClickEvent = new DOMEvent('click', { mouseButton: 'left' }, true);
+console.log(`Dispatching 'click' event with stopPropagation from ${button}...`);
+button.dispatchEvent(stopClickEvent);
+console.log('Notice: The <form> did NOT receive the bubbled click event!');
