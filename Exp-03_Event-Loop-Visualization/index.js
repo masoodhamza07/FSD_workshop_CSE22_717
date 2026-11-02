@@ -133,3 +133,54 @@ function runExampleB() {
     });
   });
 }
+
+// ==============================================================================
+// EXAMPLE (C): nextTick vs Promise Microtasks Deep Dive
+// Demonstrates:
+// 1. nextTickQueue is completely exhausted before the Promise queue starts.
+// 2. A Promise scheduling a nextTick will cause that nextTick to run before the
+//    event loop moves to macrotasks.
+// 3. A nextTick scheduling a Promise will append to the Promise queue for that turn.
+// ==============================================================================
+function runExampleC() {
+  return runInFreshTick(() => {
+    console.log('\n==================================================================');
+    console.log('  EXAMPLE (C): nextTick vs PROMISE MICROTASKS DEEP DIVE          ');
+    console.log('  (Priority: nextTickQueue -> promiseMicrotaskQueue)             ');
+    console.log('==================================================================');
+
+    console.log('  [C-1: Synchronous] Registering multiple microtasks...');
+
+    // Promise 1
+    Promise.resolve().then(() => {
+      console.log('  [C-4: Promise Queue] Promise 1 executed');
+
+      // Nested nextTick inside Promise 1
+      process.nextTick(() => {
+        console.log('  [C-7: nextTick Queue] Nested nextTick inside Promise 1 executed');
+      });
+    });
+
+    // Promise 2
+    Promise.resolve().then(() => {
+      console.log('  [C-5: Promise Queue] Promise 2 executed');
+    });
+
+    // nextTick 1
+    process.nextTick(() => {
+      console.log('  [C-2: nextTick Queue] nextTick 1 executed');
+
+      // Nested Promise inside nextTick 1
+      Promise.resolve().then(() => {
+        console.log('  [C-6: Promise Queue] Nested Promise inside nextTick 1 executed');
+      });
+    });
+
+    // nextTick 2
+    process.nextTick(() => {
+      console.log('  [C-3: nextTick Queue] nextTick 2 executed');
+    });
+
+    console.log('  [C-1: Synchronous] All microtasks queued. Call stack clearing now...');
+  });
+}
