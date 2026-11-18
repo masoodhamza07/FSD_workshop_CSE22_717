@@ -21,3 +21,11 @@ Then open `http://localhost:3000` in a browser.
 - A catch-all handler returns `404` for unknown paths.
 
 ## Sample Output
+
+```text
+/          -> 200  Sugar & Crumb Bakery - home and welcome message
+/menu      -> 200  Cakes, pastries and bread with prices
+/contact   -> 200  Phone number and address
+/style.css -> 200  Shared stylesheet
+/unknown   -> 404  Page Not Found
+```
