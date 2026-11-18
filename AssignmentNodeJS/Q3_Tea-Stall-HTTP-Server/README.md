@@ -19,3 +19,16 @@ Then open `http://localhost:3000` in a browser. Set the `PORT` environment varia
 - `res.end('Welcome to NodeJS!')` sends the required message.
 
 ## Sample Output
+
+Terminal:
+
+```text
+Tea stall server running at http://localhost:3000
+[2026-11-18T10:00:00.000Z] GET /
+```
+
+Browser response with status `200`:
+
+```text
+Welcome to NodeJS!
+```
