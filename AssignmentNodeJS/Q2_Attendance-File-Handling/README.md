@@ -20,3 +20,10 @@ node index.js delete "Alicia"
 ```
 
 ## Code Overview
+
+- `readNames()` and `writeNames()` use `fs.readFileSync` and `fs.writeFileSync` on `attendance.txt`.
+- `addStudent`, `showStudents`, `updateStudent` and `deleteStudent` implement the four operations.
+- Matching is case-insensitive, and duplicate or empty names are rejected.
+- `readline/promises` drives the menu; command-line arguments allow one-shot commands.
+
+## Sample Output
