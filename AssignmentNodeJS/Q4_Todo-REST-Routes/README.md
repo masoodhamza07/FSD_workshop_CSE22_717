@@ -14,3 +14,11 @@ npm start
 The API listens on `http://localhost:3000`.
 
 ## Code Overview
+
+- Tasks are kept in the `tasks` array with an auto-incrementing `nextId`.
+- `express.json()` parses JSON request bodies.
+- `GET /tasks` returns all tasks; `POST /tasks` creates one with `completed: false`.
+- `PUT /tasks/:id` marks a task completed; `DELETE /tasks/:id` removes it.
+- Missing tasks return `404` and a missing title returns `400`.
+
+## Sample Output
