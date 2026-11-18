@@ -1,0 +1,19 @@
+{
+  "name": "q1-school-bell-system",
+  "version": "1.0.0",
+  "description": "Q1: School bell system using EventEmitter and the Node.js event loop",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "eventemitter",
+    "event-loop",
+    "nextTick",
+    "setTimeout",
+    "setImmediate"
+  ],
+  "author": "FSD Workshop",
+  "license": "ISC"
+}
