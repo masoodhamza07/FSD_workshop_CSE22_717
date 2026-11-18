@@ -14,3 +14,10 @@ npm start
 Then open `http://localhost:3000` in a browser.
 
 ## Code Overview
+
+- `express.static()` serves `public/style.css` at `/style.css`.
+- `res.sendFile()` serves `views/home.html`, `views/menu.html` and `views/contact.html`.
+- The pages share a navigation bar and link to the same stylesheet.
+- A catch-all handler returns `404` for unknown paths.
+
+## Sample Output
