@@ -1,0 +1,20 @@
+{
+  "name": "q5-bakery-express-website",
+  "version": "1.0.0",
+  "description": "Q5: Bakery website with Express.js and HTML pages",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "html",
+    "website"
+  ],
+  "author": "FSD Workshop",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
