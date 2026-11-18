@@ -13,3 +13,9 @@ node index.js
 Then open `http://localhost:3000` in a browser. Set the `PORT` environment variable to use another port.
 
 ## Code Overview
+
+- `http.createServer()` handles every incoming request with the same response.
+- `res.writeHead(200, ...)` sends status code `200` with a plain-text content type.
+- `res.end('Welcome to NodeJS!')` sends the required message.
+
+## Sample Output
