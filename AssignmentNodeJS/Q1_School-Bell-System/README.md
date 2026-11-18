@@ -20,3 +20,15 @@ No external packages are required.
 - `setTimeout(..., 0)` runs in the timers phase and `setImmediate` in the check phase.
 
 ## Sample Output
+
+```text
+1. Synchronous: School bell system initialized.
+EVENT: Class is starting. Students, please take your seats.
+EVENT: Class has ended. Students, please leave the classroom.
+2. Synchronous: Main script finished. Event loop takes over.
+RING BELL (process.nextTick)
+RING BELL (setTimeout)
+RING BELL (setImmediate)
+```
+
+`process.nextTick` always runs first; `setTimeout` and `setImmediate` may swap at top level.
