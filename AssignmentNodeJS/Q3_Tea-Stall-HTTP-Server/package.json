@@ -1,0 +1,16 @@
+{
+  "name": "q3-tea-stall-http-server",
+  "version": "1.0.0",
+  "description": "Q3: Simple tea stall HTTP server using the Node.js http module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "http",
+    "server"
+  ],
+  "author": "FSD Workshop",
+  "license": "ISC"
+}
