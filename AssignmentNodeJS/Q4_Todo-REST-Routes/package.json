@@ -1,0 +1,21 @@
+{
+  "name": "q4-todo-rest-routes",
+  "version": "1.0.0",
+  "description": "Q4: To-Do list REST API with GET, POST, PUT and DELETE routes",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "rest",
+    "routes",
+    "todo"
+  ],
+  "author": "FSD Workshop",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
