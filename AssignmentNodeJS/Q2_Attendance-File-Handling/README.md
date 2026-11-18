@@ -27,3 +27,14 @@ node index.js delete "Alicia"
 - `readline/promises` drives the menu; command-line arguments allow one-shot commands.
 
 ## Sample Output
+
+```text
+Added Alice to the attendance list.
+Added Bob to the attendance list.
+Updated Bob to Robert.
+Deleted Alice from the attendance list.
+Student attendance list:
+  1. Robert
+```
+
+The names are persisted in `attendance.txt`, one name per line.
