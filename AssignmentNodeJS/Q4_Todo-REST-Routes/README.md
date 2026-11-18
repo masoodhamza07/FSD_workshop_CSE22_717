@@ -22,3 +22,12 @@ The API listens on `http://localhost:3000`.
 - Missing tasks return `404` and a missing title returns `400`.
 
 ## Sample Output
+
+```text
+GET    /tasks            -> []  (status 200)
+POST   /tasks            -> {"id":1,"title":"Buy milk","completed":false}  (status 201)
+PUT    /tasks/1          -> {"id":1,"title":"Buy milk","completed":true}   (status 200)
+DELETE /tasks/1          -> {"message":"Task deleted.", ...}              (status 200)
+```
+
+Because tasks live in a simple array, restarting the server clears the list.
